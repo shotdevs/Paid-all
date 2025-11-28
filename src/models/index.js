@@ -7,4 +7,5 @@ module.exports = {
     WelcomeSettings: require('./welcomeSettings'),
     Leveling: require('./leveling'),
     VcTime: require('./vcTime'),
+    AntiNuke: require('./AntiNuke'),
 };

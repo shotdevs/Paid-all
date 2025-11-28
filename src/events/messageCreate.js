@@ -1,5 +1,6 @@
 const { Ticket, Leveling, GuildConfig } = require('../models');
 const { Collection } = require('discord.js');
+const { checkAntiSpam } = require('../utils/antiSpam');
 
 const cooldowns = new Collection();
 
@@ -7,6 +8,9 @@ module.exports = {
     name: 'messageCreate',
     async execute(message) {
         if (message.author.bot || !message.guild) return;
+
+        const isSpam = await checkAntiSpam(message);
+        if (isSpam) return;
 
         // Ticket activity logic
         try {

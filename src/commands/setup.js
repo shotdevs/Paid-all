@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { GuildConfig } = require('../models');
 const { createSuccessContainer } = require('../utils/embedBuilder');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
-const { MessageFlags , MessageFlags } = require('discord.js');
+const { MessageFlags } = require('discord.js');
 const logger = require('../utils/logger');
 
 module.exports = {
@@ -122,4 +122,3 @@ module.exports = {
         }
     },
 };
-

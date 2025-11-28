@@ -2,10 +2,15 @@ const { Events } = require('discord.js');
 const { WelcomeSettings } = require('../models');
 const { NewWelcomeCard } = require('pixel-cards');
 const { AttachmentBuilder } = require('discord.js');
+const { checkAntiRaid } = require('../utils/antiRaid');
 
 module.exports = {
   name: Events.GuildMemberAdd,
   async execute(member) {
+    await checkAntiRaid(member);
+
+    if (member.user.bot) return;
+
     const welcomeSettings = await WelcomeSettings.findOne({ guildId: member.guild.id });
     if (!welcomeSettings || !welcomeSettings.welcomeChannelId) {
       return;
@@ -16,7 +21,6 @@ module.exports = {
       return;
     }
 
-    // Assign role
     if (welcomeSettings.welcomeRole) {
       const role = member.guild.roles.cache.get(welcomeSettings.welcomeRole);
       if (role) {

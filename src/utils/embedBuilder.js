@@ -1,6 +1,6 @@
 const COMPONENT_FLAGS = 1 << 15;
 
-function createTicketContainer(ticket, buttons = []) {
+function createTicketContainer(ticket, buttons = [], additionalContent = '') {
     const components = [
         {
             type: 10,
@@ -16,6 +16,18 @@ function createTicketContainer(ticket, buttons = []) {
             content: `**📋 Category:** ${ticket.categoryId}\n**📅 Created:** <t:${Math.floor(ticket.createdAt.getTime() / 1000)}:R>\n**🆔 Ticket ID:** \`${ticket.ticketId.substring(0, 8)}\`\n**📝 Reason:** ${ticket.modalResponses.reason || 'No reason provided'}`
         }
     ];
+
+    if (additionalContent) {
+        components.push({
+            type: 14,
+            divider: true,
+            spacing: 1
+        });
+        components.push({
+            type: 10,
+            content: additionalContent
+        });
+    }
 
     if (buttons.length > 0) {
         components.push({

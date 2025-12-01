@@ -9,13 +9,25 @@ const vcTimeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // Total time spent in VC (in milliseconds)
   timeInVC: {
     type: Number,
     default: 0,
   },
+  // Timestamp when they joined (null if not in VC)
   joinTime: {
     type: Number,
     default: null,
+  },
+  // NEW: Track Voice Experience Points
+  voiceXp: {
+    type: Number,
+    default: 0
+  },
+  // NEW: Track Voice Level
+  voiceLevel: {
+    type: Number,
+    default: 0
   }
 });
 
